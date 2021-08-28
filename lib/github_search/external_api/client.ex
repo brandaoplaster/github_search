@@ -1,4 +1,4 @@
-defmodule GithubSearch.ExternalApi do
+defmodule GithubSearch.ExternalApi.Client do
   use Tesla
 
   alias Tesla.Env
@@ -7,7 +7,7 @@ defmodule GithubSearch.ExternalApi do
   plug(Tesla.Middleware.Headers, [{"user-agent", "request"}])
   plug(Tesla.Middleware.JSON)
 
-  def search_user_github(username) do
+  def search_user_github(%{"username" => username}) do
     "#{username}/repos"
     |> get()
     |> handle_get()
